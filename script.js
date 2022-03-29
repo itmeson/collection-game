@@ -1,17 +1,19 @@
 const deal = document.getElementById('deal');
 deal.addEventListener('click', dealBoard);
+var deck = shuffleDeck();
+var score = 0;
 
 var selected = [];
 
 function dealBoard() {
     /*lay out a 3 by 4 grid of cards*/
-    const deck = shuffleDeck();
     const board = document.getElementById('board');
     board.innerHTML = '';
     for (let i = 0; i < 12; i++) {
         const card = document.createElement('div');
         card.classList.add('card');
         card.setAttribute('data-card', deck[i]);
+        card.classList.add(...deck[i]);
         card.addEventListener('click', pickCard);
         card.innerHTML = deck[i]
         board.appendChild(card);
@@ -59,8 +61,14 @@ function shuffle(array) {
   function pickCard(e) {
       console.log(e.target)
         if (selected.length <= 2) {
-            e.target.classList.add('selected');
-            selected.push(e.target);
+            if (e.target.classList.contains('selected')) {
+                e.target.classList.remove('selected');
+                selected.splice(selected.indexOf(e.target.getAttribute('data-card')), 1);
+
+            } else {
+                e.target.classList.add('selected');
+                selected.push(e.target);
+            }
         }
         if (selected.length === 3) {
             setTimeout (() => {checkMatch()}, 2000);
@@ -87,10 +95,33 @@ function shuffle(array) {
         if (flag) {
             console.log('match');
             selected.forEach(card => card.classList.add('matched'));
+            selected.forEach(card => card.classList.remove('selected'));
+            refillTaken();
+            updateScore();
         }
         else {
             console.log('no match');
             selected.forEach(card => card.classList.remove('selected'));
             selected = [];
         }
+  }
+
+  function refillTaken() {
+        const taken = document.querySelectorAll('.matched');
+        taken.forEach(card => card.classList.remove('matched'));
+        taken.forEach(card => {
+            let newCard = deck.shift();
+            card.classList.remove(...card.getAttribute('data-card').split(','));
+            card.setAttribute('data-card', newCard);
+            card.classList.add(...newCard);
+            card.innerHTML = newCard;
+        });
+        selected = [];
+  }
+
+  function updateScore() {
+        score += 1;
+        const scoreBoard = document.getElementById('score');
+        scoreBoard.innerHTML = score;
+        
   }

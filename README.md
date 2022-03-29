@@ -22,9 +22,10 @@ Next
 ----
 
 0. Test cases to make sure that matching works properly (not-matching works by eye)
-1. remove matched cards from the board
-2. increment score
-3. deal into missing spaces
-4. make grid lay out correctly
+1. ~~remove matched cards from the board~~
+2. ~~increment score~~
+3. ~~deal into missing spaces~~
+4. ~~make grid lay out correctly~~
 5. reshuffle board
 6. start over
+7. Make shapes, number, and filling in CSS.  Got the color already.

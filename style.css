@@ -1,6 +1,7 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
+    max-width: 250px;
+    min-width: 250px;
     height: 200px;
     margin: auto;
     text-align: center;
@@ -11,10 +12,43 @@
     width: 100%;
     height: 100%;
     background-color: #f1f1f1;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     
 }
 
 .selected {
-    background-color: aqua;
+    /* make wider */
+    border: 8px dashed black;
+}
+
+.red {
+    background-color: rgb(221, 127, 127);
+}
+
+.green {
+    background-color: rgb(74, 175, 74);
+}
+
+.purple {
+    background-color: rgb(127, 127, 221);
+}
+
+.oval {
+    width: 75px;
+    height: 125px;
+    border-radius: 100px / 50px;
+  }
+
+.diamond {
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+   /* border-bottom: 70px solid;*/
+    position: relative;
+    top: -50px;
+  }
+
+.squiggle {
+
 }
